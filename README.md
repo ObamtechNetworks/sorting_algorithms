@@ -1,4 +1,4 @@
-# 1B. C - Sorting algorithms & Big O
+# 0x1B. C - Sorting algorithms & Big O
 
 So, here's another collaborative project at ALX which is a fun project that revolves around algorithms - *SORTING ALGORITHMS*
 
