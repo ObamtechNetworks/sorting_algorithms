@@ -3,11 +3,11 @@
 So, here's another collaborative project at ALX which is a fun project that revolves around algorithms - *SORTING ALGORITHMS*
 
 In this project, I am going to be collaborating with:
-[John Living Proof](https://github.com/johnlivingprooff)
+[John-Livingproof](https://github.com/johnlivingprooff)
 
 We would also be exploring the concept of Big O Notation, algorithm time and space complexity likewise
 
-# Lrning Objectives
+# Learning Objectives
 
 ### General
 - At least four different sorting algorithms
