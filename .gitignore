@@ -1,5 +1,8 @@
-main.c
+0-main.c
+2-main.c
 a.out
-print_array.c
-print_list.c
+bubble
+select
+insertion
+1-main.c
 git.sh
