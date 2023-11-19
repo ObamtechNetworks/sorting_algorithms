@@ -1,5 +1,4 @@
 #include "sort.h"
-
 /**
  * swap - a function that swaps two elements
  * @a: address of the first element
@@ -14,7 +13,6 @@ void swap(int *a, int *b)
 	*b = *a;
 	*a = temp;
 }
-
 /**
  * selection_sort - sorts an array of int in asc using the selection_sort algo.
  * @array: pointer to the first integer in the array
