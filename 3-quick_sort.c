@@ -22,27 +22,34 @@ void swap(int *a, int *b)
  */
 int partition_array(int *array, int low, int high)
 {
-	int arr_size = sizeof(&array) / sizeof(array[0]);
-	int pivot = array[arr_size - 1];
+	int pivot = array[high]; /*select the last elment as computed in main func*/
 	int lowidx = low;
 	int highidx = high - 1;
+	int isswaped = 0;
 
 	while (1)
 	{
-		while (array[lowidx] < pivot)
+		while (array[lowidx] < pivot && lowidx < high)
 		{
 			lowidx++;
 		}
-		while (array[highidx] > pivot && highidx >= 0)
+		while (array[highidx] > pivot && highidx >= lowidx)
 		{
 			highidx--;
 		}
 		if (lowidx >= highidx)
 			break;
 		else
+		{
 			swap(&array[lowidx], &array[highidx]);
+			isswaped = 1;
+		}
 	}
-	swap(&array[lowidx], &pivot);
+	swap(&array[lowidx], &array[high]);
+	if (isswaped)
+	{
+		print_array(array, high + 1);
+	}
 	return (lowidx);
 }
 
@@ -66,7 +73,8 @@ void quick_sort(int *array, size_t size)
 	if (low < high) /*base case*/
 	{
 		pivot = partition_array(array, low, high);
-		quick_sort(&low, pivot - 1);
-		quick_sort(&pivot + 1, high);
+		quick_sort(array, pivot);
+		/*high - pivot gets size of sublist*/
+		quick_sort(&array[pivot + 1], high - pivot);
 	}
 }
