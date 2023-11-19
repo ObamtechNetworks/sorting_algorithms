@@ -1,55 +1,40 @@
 #include "sort.h"
-/**
- * swap - a function that swaps two elements
- * @a: address of the first element
- * @b: address of the second element
- * Return: nothing
- */
-void swap(int *a, int *b)
-{
-	int temp; /*a temporary variable for helping the swapping*/
 
-	temp = *b;
-	*b = *a;
-	*a = temp;
-}
 /**
- * insertion_sort_list - sorts a dbly linked list of int in asc using ins sort
- * @list: the linked list to sort
- * Return: void
- */
+ * insertion_sort_list - function that sorts a doubly linked list of integers
+ * in ascending order using the Insertion sort algorithm
+ * @list: the list to be sorted
+ * doesn't return
+*/
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *current = NULL, *next = NULL, *temp = NULL;
+	listint_t *node, *current;
 
-	/*edge cases*/
-	if (!list || *list == NULL || (*list)->next == NULL)
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
-	current = (*list)->next; /*start from second node*/
-	while (current)
+	current = (*list)->next;
+	while (current != NULL)
 	{
-		next = current->next;
-		while (current->prev && current->prev->n > current->n)
-		{
-			temp = current->prev; /*previous node*/
+		node = current;
+		while (node->prev != NULL && node->n < node->prev->n)
+		{	/*swapping prev node with next node*/
+			node->prev->next = node->next;
+			if (node->next != NULL)
+				node->next->prev = node->prev;
 
-			if (temp->prev) /*if there's an element behind prev node*/
-				/*set the elem behind to current*/
-				temp->prev->next = current; /*do swapping*/
-			else
-				*list = current; /*else set to be the first node*/
+			node->next = node->prev;
+			node->prev = node->prev->prev;
+			if (node->prev != NULL)
+				node->prev->next = node;
 
-			if (current->next != NULL)
-				current->next->prev = temp;
+			node->next->prev = node;
+			if (node->prev == NULL)
+				*list = node;
 
-			current->prev = temp->prev;
-			temp->next = current->next;
-			current->next = temp;
-			temp->prev = current;
-			/*print list at end of first move*/
 			print_list(*list);
 		}
-		current = next;
+		current = current->next;
 	}
+
 }
