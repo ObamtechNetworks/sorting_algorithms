@@ -9,6 +9,7 @@
 */
 void selection_sort(int *array, size_t size)
 {
+<<<<<<< HEAD
 	size_t i, j, min;
 	int tmp;
 
@@ -31,4 +32,25 @@ void selection_sort(int *array, size_t size)
 			print_array(array, size);
 		}
 	}
+=======
+    size_t i, j, min;
+    int tmp;
+
+    for (i = 0; i < size - 1; i++)
+    {
+        min = i;
+        for (j = i + 1; j < size; j++)
+        {
+            if (array[j] < array[min])
+                min = j;
+        }
+        if (min != i)
+        {
+            tmp = array[i];
+            array[i] = array[min];
+            array[min] = tmp;
+            print_array(array, size);
+        }
+    }
+>>>>>>> 183a793c3e7c13db8101feac176bc7b588bf04e5
 }

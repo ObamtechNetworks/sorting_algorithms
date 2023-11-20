@@ -1,80 +1,59 @@
 #include "sort.h"
-/**
- * swap - a function that swaps two elements
- * @a: address of the first element
- * @b: address of the second element
- * Return: nothing
- */
-void swap(int *a, int *b)
-{
-	int temp; /*a temporary variable for helping the swapping*/
 
-	temp = *b;
-	*b = *a;
-	*a = temp;
-}
 /**
- * partition_array - partitions the array to sort
- * @array: the array to partition
- * @low: the index of the lowest element in the list
- * @high: the index of the highest element in the list
- * Return: returns the low_idx, which is actually the pivot
- */
-int partition_array(int *array, int low, int high)
+ * partition - divides the array into segments
+ * for a divide and conquer approach
+ * @array: the array to be partitioned
+ * @low: the lowest index
+ * @high: the highest index
+ * Return: the index where the partition pivots
+*/
+int partition(int *array, int low, int high)
 {
-	int pivot = array[high]; /*select the last elment as computed in main func*/
-	int lowidx = low;
-	int highidx = high - 1;
-	int isswaped = 0;
+	int pivot = array[high];
+	int i = low - 1, j, tmp;
 
-	while (1)
+	for (j = low; j <= high - 1; j++)
 	{
-		while (array[lowidx] < pivot && lowidx < high)
+		if (array[j] < pivot)
 		{
-			lowidx++;
-		}
-		while (array[highidx] > pivot && highidx >= lowidx)
-		{
-			highidx--;
-		}
-		if (lowidx >= highidx)
-			break;
-		else
-		{
-			swap(&array[lowidx], &array[highidx]);
-			isswaped = 1;
+			i++; /*increment i before swap*/
+			tmp = array[i];
+			array[i] = array[j];
+			array[j] = tmp;
 		}
 	}
-	swap(&array[lowidx], &array[high]);
-	if (isswaped)
-	{
-		print_array(array, high + 1);
-	}
-	return (lowidx);
+
+	tmp = array[i + 1];
+	array[i + 1] = array[high];
+	array[high] = tmp;
+
+	return (i + 1);
 }
 
 /**
- * quick_sort - sorts an arr of int in ascd.Order using the Quick sort algo.
- * @array: pointer to the first element of the array to sort
- * @size: size of the array
- * Return: void
- */
+ * quick_sort - this function sorts in the divide & conquer approach
+ * @array: the array to be sorted
+ * @size: the array's size
+ * doesn't return
+*/
 void quick_sort(int *array, size_t size)
 {
 	int low, high, pivot;
-	/*edge cases*/
+
+	/*where array is empty*/
 	if (!array || !size)
 		return;
 
 	low = 0;
 	high = size - 1;
 
-	/*recursive call*/
-	if (low < high) /*base case*/
+	if (low < high)
 	{
-		pivot = partition_array(array, low, high);
+		pivot = partition(array, low, high);
 		quick_sort(array, pivot);
-		/*high - pivot gets size of sublist*/
 		quick_sort(&array[pivot + 1], high - pivot);
 	}
+
+	print_array(array, size);
 }

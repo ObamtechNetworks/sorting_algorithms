@@ -37,4 +37,8 @@ void insertion_sort_list(listint_t **list)
 		current = current->next;
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 183a793c3e7c13db8101feac176bc7b588bf04e5
