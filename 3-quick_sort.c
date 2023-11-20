@@ -38,6 +38,7 @@ int lomuto_arr_partition(int *array, int low, int high, size_t size)
 				print_array(array, size);
 			}
 		}
+
 	}
 	if (i + 1 != high)
 	{
@@ -71,7 +72,9 @@ void quick_sort_helper(int *array, int low, int high, size_t size)
 		{
 			quick_sort_helper(array, pivot + 1, high, size);
 		}
+
 	}
+
 }
 /**
  * quick_sort - sorts an arr of int in ascd.Order using the Quick sort algo.
