@@ -6,9 +6,10 @@
  * @array: the array to be partitioned
  * @low: the lowest index
  * @high: the highest index
+ * @size: the sizeof(array)
  * Return: the index where the partition pivots
 */
-int partition(int *array, int low, int high)
+int partition(int *array, int low, int high, size_t size)
 {
 	int pivot = array[high];
 	int i = low - 1, j, tmp;
@@ -21,6 +22,7 @@ int partition(int *array, int low, int high)
 			tmp = array[i];
 			array[i] = array[j];
 			array[j] = tmp;
+			print_array(array, size);
 		}
 	}
 
@@ -50,10 +52,9 @@ void quick_sort(int *array, size_t size)
 
 	if (low < high)
 	{
-		pivot = partition(array, low, high);
+		pivot = partition(array, low, high, size);
 		quick_sort(array, pivot);
 		quick_sort(&array[pivot + 1], high - pivot);
 	}
 
-	print_array(array, size);
 }
