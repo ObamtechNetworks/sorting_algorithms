@@ -5,7 +5,7 @@
  * @b: address of the second element
  * Return: nothing
  */
-void swap(int *a, int *b)
+void quick_sort_swap(int *a, int *b)
 {
 	int temp; /*a temporary variable for helping the swapping*/
 
@@ -20,37 +20,30 @@ void swap(int *a, int *b)
  * @high: the index of the highest element in the list
  * Return: returns the low_idx, which is actually the pivot
  */
-int partition_array(int *array, int low, int high)
+int lomuto_arr_partition(int *array, int low, int high, size_t size)
 {
 	int pivot = array[high]; /*select the last elment as computed in main func*/
-	int lowidx = low;
-	int highidx = high - 1;
-	int isswaped = 0;
-
-	while (1)
+	int i = low - 1;
+	int j;
+	
+	for (j = low; j <= high - 1; j++)
 	{
-		while (array[lowidx] < pivot && lowidx < high)
+		if (array[j] <= pivot)
 		{
-			lowidx++;
-		}
-		while (array[highidx] > pivot && highidx >= lowidx)
-		{
-			highidx--;
-		}
-		if (lowidx >= highidx)
-			break;
-		else
-		{
-			swap(&array[lowidx], &array[highidx]);
-			isswaped = 1;
+			i++;
+			if (i != j)
+			{
+				quick_sort_swap(&array[j], &array[i]);
+				print_array(array, size);
+			}
 		}
 	}
-	swap(&array[lowidx], &array[high]);
-	if (isswaped)
+	if (i + 1 != high)
 	{
-		print_array(array, high + 1);
+		quick_sort_swap(&array[i + 1], &array[high]);
+		print_array(array, size);
 	}
-	return (lowidx);
+	return(i + 1);
 }
 
 /**
@@ -59,22 +52,43 @@ int partition_array(int *array, int low, int high)
  * @size: size of the array
  * Return: void
  */
+
+
+void quick_sort_rec(int *array, int low, int high, size_t size)
+{
+    if (low < high)
+    {
+        int pivot = lomuto_arr_partition(array, low, high, size);
+        if (pivot > low)
+        {
+            quick_sort_rec(array, low, pivot - 1, size);
+        }
+        if (pivot + 1 < high)
+        {
+            quick_sort_rec(array, pivot + 1, high, size);
+        }
+    }
+}
 void quick_sort(int *array, size_t size)
 {
-	int low, high, pivot;
-	/*edge cases*/
-	if (!array || !size)
+
+    quick_sort_rec(array, 0, size - 1, size);
+    print_array(array, size);
+/*
+	int pivot;
+	int high = size - 1;
+	int low = 0;
+	if (!array || size < 2)
 		return;
 
-	low = 0;
-	high = size - 1;
-
-	/*recursive call*/
-	if (low < high) /*base case*/
+	while (low < high)
 	{
-		pivot = partition_array(array, low, high);
-		quick_sort(array, pivot);
-		/*high - pivot gets size of sublist*/
-		quick_sort(&array[pivot + 1], high - pivot);
+		pivot = lomuto_arr_partition(array, low, high, size);
+		if (pivot - 1 > low)
+		{
+			quick_sort(array + low, pivot - low);
+		}
+		low = pivot + 1;
 	}
+	*/
 }
