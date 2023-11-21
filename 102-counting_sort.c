@@ -31,6 +31,7 @@ void counting_sort(int *array, size_t size)
         count[array[i]]++;
     for (x = 1; x <= max; x++) /*update count array cumulatively*/
         count[x] += count[x - 1];
+    print_array(count, max + 1);
 
     /*storing sorted array*/
     result = malloc(size * sizeof(int));
