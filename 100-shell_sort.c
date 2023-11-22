@@ -43,7 +43,7 @@ void shell_sort(int *array, size_t size)
 			array[j] = tmp;
 		}
 		/*unto the next space in knuth*/
-		space = (space - 1) / 3;
+		space /= 3;
 		print_array(array, size);
 	}
 }
