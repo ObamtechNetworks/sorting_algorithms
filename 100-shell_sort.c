@@ -9,8 +9,12 @@
 */
 void shell_sort(int *array, size_t size)
 {
+
 	size_t i, j, space;
 	int tmp;
+
+	if (!array || !size)
+		return;
 
 	/*creating the knuth sequence*/
 	space = 1;
