@@ -58,15 +58,15 @@ int hoare_partition(int *array, int low, int high, size_t size)
  * @size: size of the array
  * Return: void
  */
-void quick_sort_helper(int *array, int low, int high, size_t size)
+void quick_sort_util(int *array, int low, int high, size_t size)
 {
 	int pivot;
 
 	if (low < high)
 	{
 		pivot = hoare_partition(array, low, high, size);
-		quick_sort_helper(array, low, pivot, size);
-		quick_sort_helper(array, pivot + 1, high, size);
+		quick_sort_util(array, low, pivot, size);
+		quick_sort_util(array, pivot + 1, high, size);
 
 	}
 
@@ -82,5 +82,5 @@ void quick_sort_hoare(int *array, size_t size)
 	if (!array)
 		return;
 
-	quick_sort_helper(array, 0, size - 1, size);
+	quick_sort_util(array, 0, size - 1, size);
 }
