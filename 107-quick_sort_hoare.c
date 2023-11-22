@@ -51,7 +51,7 @@ int hoare_partition(int *array, int low, int high, size_t size)
 }
 
 /**
- * quick_sort_helper - sorts an arr of int using hoare partition scheme
+ * quick_sort_util - sorts an arr of int using hoare partition scheme
  * @array: pointer to the first element of the array to sort
  * @low: the lower bound of the array
  * @high: the higher/upper bound of the array
