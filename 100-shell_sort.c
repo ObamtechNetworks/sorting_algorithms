@@ -10,7 +10,7 @@
 void shell_sort(int *array, size_t size)
 {
 
-	int i, j, space;
+	size_t i, j, space;
 	int tmp;
 
 	if (!array || !size)
@@ -18,13 +18,17 @@ void shell_sort(int *array, size_t size)
 
 	/*creating the knuth sequence*/
 	space = 1;
-	while (space < (int)size / 3)
+	while (space < size / 3u)
+	{
+		if (space > SIZE_MAX / 4)
+			break; /* prevent overflow/infinite loop*/
 		space = space * 3 + 1;
+	}
 
 	/*sorting with decreasing spaces*/
 	while (space > 0)
 	{
-		for (i = space; i < (int)size; i++)
+		for (i = space; i < size; i++)
 		{
 			tmp = array[i];
 
@@ -32,6 +36,9 @@ void shell_sort(int *array, size_t size)
 			for (j = i; j >= space && array[j - space] > tmp; j -= space)
 			{
 				array[j] = array[j - space];
+
+				if (j < space)
+					break; /*prevent out of bound*/
 			}
 
 			/*current element is placed right*/
