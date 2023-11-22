@@ -20,8 +20,6 @@ void shell_sort(int *array, size_t size)
 	space = 1;
 	while (space < size / 3u)
 	{
-		if (space > SIZE_MAX / 4)
-			break; /* prevent overflow/infinite loop*/
 		space = space * 3 + 1;
 	}
 
