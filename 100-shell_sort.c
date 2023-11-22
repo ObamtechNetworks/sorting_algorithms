@@ -29,8 +29,15 @@ void shell_sort(int *array, size_t size)
 			tmp = array[i];
 
 			/*shift elements in  the sorted part*/
-			for (j = i; j >= space && array[j - space] > tmp; j -= space)
+			for (j = i; j >= space && array[j - space] > tmp;)
+			{
 				array[j] = array[j - space];
+
+				/*since we are using size_t prevent out of bound error*/
+				if (j < space)
+					break;
+				j -= space;
+			}
 
 			/*current element is placed right*/
 			array[j] = tmp;
